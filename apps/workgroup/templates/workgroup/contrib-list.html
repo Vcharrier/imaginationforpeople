@@ -16,21 +16,31 @@
      
     <script type="text/javascript">
         function collapseMainContrib() {                                
-            $('#main_contrib p').animate({ height: "90px" }, {duration : 800});
+            $('#main_contrib p').animate({ height: "100px" }, {duration : 800});
             $('.collapse-arrow.collapse1').addClass('hidden');
             $('.collapse-arrow.uncollapse1').removeClass('hidden');
         }
         
         function uncollapseMainContrib() {
-            $('#main_contrib p').animate({ height: "250px" }, {duration : 800});
+            $('#main_contrib p').animate({ height: "100%" }, {duration : 800});
             $('.collapse-arrow.uncollapse1').addClass('hidden');
             $('.collapse-arrow.collapse1').removeClass('hidden');
+        }
+        
+        
+        function displayAnswers() {
+            $(this).parents("li").find('.contrib-form:first').toggleClass('hidden');
         }
         
         $(document).ready(function() {
             var executecmd = true;
             var formIsVisible = false;
             var sub_commentsIsVisible = false;
+            
+            
+            //MAIN COMMENT RESIZING
+            
+            $('#main_contrib p').animate({ height: "100px" }, {duration : 800});
             
             $('#main_contrib p').click(function() {
                 if(executecmd){
@@ -55,11 +65,13 @@
             });
             
             
-            $('.comment-actions .answer_button').click(function() {
-                $(this).closest("li").find('.contrib-form:first').toggleClass('hidden');
-            });
+            //ANSWER FIELD SHOW / HIDE
+
+            $('.comment-actions .answer_button').click(displayAnswers);
             
             
+            //SUB-COMMENTS COLLAPSING / UNCOLLAPSING
+
             $('#contrib-list .see_answer').click(function() {
                 var ul = $(this).closest("li").find("ul");
                 //console.log(ul.height());
@@ -68,6 +80,20 @@
                 }else{
                     ul.animate({ height: "100%" }, {duration : 800});
                 }
+            });
+            
+            
+            //FAKE COMMENT POST
+            
+            $('#main_contrib .button.post_comment').click(function() {
+                $('#contrib-list li:last .clear:last').after('<li><img src="http://imaginationforpeople.org/site_media/mugshots/dcc99a7484.jpg" alt="NIOUZ !" class="avatar" /><div class="comment-body"><span class="comment-infos"><a href="#" class="username">MAIN NIOUZ !</a> | 12 Novembre 2011</span><span class="comment-answers"><a href="javascript:;" class="see_answer">{% trans "12 answers &gt;" %}</a></span><p class="comment">Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing</a> elit. Cras id velit vitae enim consequat sodales ut ut tellus. In hac habitasse platea dictumst. Nam mi lectus, fermentum sed mattis eget, rutrum et orci. Quisque eget erat nibh, ultrices fermentum augue...</p><span class="comment-actions"><a href="javascript:;" class="answer_button">{% trans "Answer" %}</a> | <a href="javascript:;" id="vote_button">{% trans "Vote" %}</a></span></div><div class="clear"></div><form class="contrib-form hidden" action="javascript:;" method="post"><input type="text" class="comment-field" /><input title="{% trans "Ok"|capfirst %}" class="button greenbutton nomargin right post_comment" type="image" src="{{ STATIC_URL }}images/base/v.png" alt="Ok" /></form><div class="clear"></div></li>');
+            });
+
+            $('#contrib-list .button.post_comment').click(function() {
+                var fakeComment = $('<ul><li><img src="http://imaginationforpeople.org/site_media/mugshots/dcc99a7484.jpg" alt="NIOUZ !" class="avatar" /><div class="comment-body"><span class="comment-infos"><a href="#" class="username">NIOUZ !</a> | 12 Novembre 2011</span><span class="comment-answers"><a href="javascript:;" class="see_answer">{% trans "12 answers &gt;" %}</a></span><p class="comment">Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing</a> elit. Cras id velit vitae enim consequat sodales ut ut tellus. In hac habitasse platea dictumst. Nam mi lectus, fermentum sed mattis eget, rutrum et orci. Quisque eget erat nibh, ultrices fermentum augue...</p><span class="comment-actions"><a href="javascript:;" class="answer_button">{% trans "Answer" %}</a> | <a href="javascript:;" id="vote_button">{% trans "Vote" %}</a></span></div><div class="clear"></div><form class="contrib-form hidden" action="javascript:;" method="post"><input type="text" class="comment-field" /><input title="{% trans "Ok"|capfirst %}" class="button greenbutton nomargin right post_comment" type="image" src="{{ STATIC_URL }}images/base/v.png" alt="Ok" /></form><div class="clear"></div></li></ul>')
+                fakeComment.find('.comment-actions .answer_button').click(displayAnswers);
+                $(this).parents('li').find('.clear:last').after(fakeComment);
+                $(this).closest('li').find('ul').animate({ height: "100%" }, {duration : 800});
             });
             
         });
@@ -87,19 +113,19 @@
     <br />
     <div id="main_contrib">
         <img src="http://imaginationforpeople.org/site_media/mugshots/dcc99a7484.jpg" alt="User name" width="57" height="57" />
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br/>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         <div class="clear"></div>
         <a href="javascript:;" class="collapse-arrow uncollapse1"><img src="{{ STATIC_URL }}images/workgroups/uncollapse-arrow.png" alt="#"/></a>
         <a href="javascript:;" class="collapse-arrow collapse1 hidden"><img src="{{ STATIC_URL }}images/workgroups/collapse-arrow.png" alt="#"/></a>
+    
+        <!-- Main comment form -->
+        <form class="contrib-form" action="javascript:;" method="post">
+            {% csrf_token %}
+            <input type="text" class="comment-field" />
+            <input title="{% trans 'Ok'|capfirst %}" class="button greenbutton nomargin right post_comment" type="image" src="{{ STATIC_URL }}images/base/v.png" alt="Ok" />							
+        </form>	
+    
     </div>
-
-    <!-- Main comment form -->
-    <form class="contrib-form" action="#" method="post">
-        {% csrf_token %}
-        <input type="text" class="comment-field" />
-        <input title="{% trans 'Ok'|capfirst %}" class="button greenbutton nomargin right" type="image" src="{{ STATIC_URL }}images/base/v.png" alt="Ok" />							
-    </form>	
-
     
     <!-- NE PAS OUBLIER DE FAIRE UN TEMPLATE DEDIE A LA CONTRIBUTION SEULE -->
 
