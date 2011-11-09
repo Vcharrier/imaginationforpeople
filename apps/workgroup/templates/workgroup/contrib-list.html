@@ -62,9 +62,9 @@
             
             $('#contrib-list .see_answer').click(function() {
                 var ul = $(this).closest("li").find("ul");
-                console.log(ul.height());
+                //console.log(ul.height());
                 if(ul.height() != 0){
-                     ul.animate({  height: "0px" }, {duration : 800});
+                    ul.animate({  height: "0px" }, {duration : 800});
                 }else{
                     ul.animate({ height: "100%" }, {duration : 800});
                 }
