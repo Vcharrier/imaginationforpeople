@@ -1,0 +1,132 @@
+{% extends "workgroup/contrib_base.html" %}
+{% load i18n %}
+{% load compress %}
+
+{% block extra_head %}
+    {{ block.super }}
+
+    {% compress js %}
+    <script type="text/javascript" src="/static/js/jquery/jquery.example.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        $(".contrib-form .comment-field").example("{% trans 'add a contribution' %}");
+     });
+     </script>
+     
+    <script type="text/javascript">
+        function collapseMainContrib() {                                
+            $('#main_contrib p').animate({ height: "90px" }, {duration : 800});
+            $('.collapse-arrow.collapse1').addClass('hidden');
+            $('.collapse-arrow.uncollapse1').removeClass('hidden');
+        }
+        
+        function uncollapseMainContrib() {
+            $('#main_contrib p').animate({ height: "250px" }, {duration : 800});
+            $('.collapse-arrow.uncollapse1').addClass('hidden');
+            $('.collapse-arrow.collapse1').removeClass('hidden');
+        }
+        
+        $(document).ready(function() {
+            var executecmd = true;
+            var formIsVisible = false;
+            var sub_commentsIsVisible = false;
+            
+            $('#main_contrib p').click(function() {
+                if(executecmd){
+                    executecmd = false;
+                    uncollapseMainContrib();
+                    executecmd = true;
+                }
+            });
+            $('.collapse-arrow.uncollapse1').click(function() {
+                if(executecmd){
+                    executecmd = false;
+                    uncollapseMainContrib();
+                    executecmd = true;
+                }
+            });
+            $('.collapse-arrow.collapse1').click(function() {
+                if(executecmd){
+                    executecmd = false;
+                    collapseMainContrib();
+                    executecmd = true;
+                }
+            });
+            
+            
+            $('.comment-actions .answer_button').click(function() {
+                $(this).closest("li").find('.contrib-form:first').toggleClass('hidden');
+            });
+            
+            
+            $('#contrib-list .see_answer').click(function() {
+                var ul = $(this).closest("li").find("ul");
+                console.log(ul.height());
+                if(ul.height() != 0){
+                     ul.animate({  height: "0px" }, {duration : 800});
+                }else{
+                    ul.animate({ height: "100%" }, {duration : 800});
+                }
+            });
+            
+        });
+
+
+    </script>
+                            
+    {% endcompress %}
+{% endblock %}
+
+
+
+{% block contrib-list %}
+
+    <!-- Title and main contribution -->
+    <h1 class="workgroup-title">Workgroup name</h1>
+    <br />
+    <div id="main_contrib">
+        <img src="http://imaginationforpeople.org/site_media/mugshots/dcc99a7484.jpg" alt="User name" width="57" height="57" />
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <div class="clear"></div>
+        <a href="javascript:;" class="collapse-arrow uncollapse1"><img src="{{ STATIC_URL }}images/workgroups/uncollapse-arrow.png" alt="#"/></a>
+        <a href="javascript:;" class="collapse-arrow collapse1 hidden"><img src="{{ STATIC_URL }}images/workgroups/collapse-arrow.png" alt="#"/></a>
+    </div>
+
+    <!-- Main comment form -->
+    <form class="contrib-form" action="#" method="post">
+        {% csrf_token %}
+        <input type="text" class="comment-field" />
+        <input title="{% trans 'Ok'|capfirst %}" class="button greenbutton nomargin right" type="image" src="{{ STATIC_URL }}images/base/v.png" alt="Ok" />							
+    </form>	
+
+    
+    <!-- NE PAS OUBLIER DE FAIRE UN TEMPLATE DEDIE A LA CONTRIBUTION SEULE -->
+
+    <ul id="contrib-list">        
+        <li>
+            {% include "workgroup/contrib-detail.html" %}
+        </li>
+        
+        <li>
+            {% include "workgroup/contrib-detail.html" %}
+            
+            <ul>
+                <li>
+                    {% include "workgroup/contrib-detail.html" %}
+                </li>
+                <li>
+                    {% include "workgroup/contrib-detail.html" %}
+                </li>
+            </ul>
+        </li>
+        
+        <li>
+            {% include "workgroup/contrib-detail.html" %}
+        </li>
+
+        
+    <div class="clear"></div>
+    </ul>    
+
+{% endblock %}

@@ -48,6 +48,9 @@ urlpatterns = patterns('',
 
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
+    
+    url(r'^workgroup-test/', direct_to_template, {'template' : "workgroup/contrib-list.html"}, name='workgroup-test'),
+
 )
 
 ## Javascript i18n catalog

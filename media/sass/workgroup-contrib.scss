@@ -1,0 +1,195 @@
+@import "mixin.scss";
+
+$grey-contrib: #737373;
+
+.content{
+    background-image:none !important;
+}
+
+.container_18.contributions{
+    background-image: url("../images/workgroups/white-page-content-bg2.jpg");
+    background-position: center center;
+    background-repeat: repeat-y;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+/* --Contributions - General ------- */
+
+
+#infos_column {
+}
+
+#contrib_column{
+    color:$grey-contrib;
+    
+    a{
+        color:$blue;
+    }
+}
+
+#ressources_column {
+}
+
+
+/* --Contributions - Middle column ------- */
+
+h1.workgroup-title{
+    @include georgia(22px);
+    color:black;
+}
+
+#main_contrib{
+
+    p{
+        width:88%;
+        color:$grey-contrib;
+        float:right;
+        text-align:justify;
+        overflow:hidden;
+    }
+
+    .collapse-arrow{
+        text-align:center;
+        width:100%;
+        display:block;
+        border-top:1px solid #e4e4e4;
+        margin-top:10px;
+        margin-bottom:10px;        
+        padding-top:2px;
+        padding-bottom:2px;
+    }
+
+    .collapse-arrow:hover{
+        background-color:#f3ecec;
+    }
+
+}
+
+
+.contrib-form{
+    border:1px solid #e4e4e4;
+    padding:4px;
+    
+    input[type=text]{
+        width:75%;
+        border:0px;
+        color:$grey-contrib;
+        font-style:italic;
+    }
+}
+
+#contrib-list{
+    margin-top:5px;
+    margin-bottom:10px;
+
+    li:first-child{
+        margin-top:15px;
+    }
+    
+    li{
+    
+        float:right;
+        margin-top:35px;
+    
+        img.avatar{
+            width:57px;
+            height:57px;
+        }
+        
+        .comment-body{
+            width:84%;
+            float:right;
+            background-color:#e6e6e6;
+            padding:8px;
+            padding-bottom:22px;
+            margin-top:20px;
+            position:relative;
+            
+            span.comment-infos, span.comment-answers{
+                position:absolute;
+                top:-20px;
+            }
+            
+            span.comment-answers{
+                right:0px;
+                
+                a{
+                    color:#8f8f8f;
+                    font-weight:bold;
+                }
+            }
+
+            p.comment{
+                text-align:justify;
+                clear:both;
+            }
+            
+            .comment-actions{
+                position:absolute;
+                bottom:5px;
+                right:5px;
+                font-size:10px;
+                
+                a{
+                    color:#818181;
+                }
+            }
+        } 
+        
+        form.contrib-form{
+            width:85%;
+            float:right;
+            margin-top:10px;
+        }
+
+        /* Sub contribution */
+
+        ul{
+            height:0px;
+            overflow:hidden;
+        }
+        
+        ul li:first-child{
+            margin-top:35px;
+        }
+        
+        ul li{
+            width:87%;
+            margin-top:15px;
+
+            
+            img.avatar{
+                width:35px;
+                height:35px;
+            }
+        
+            .comment-body{
+                width:87%;
+                background-color:#f8f8f8;
+                background-image:none;
+                position:relative;
+                margin-top:0px;
+
+                span.comment-infos{
+                    float:left;
+                    margin-bottom:10px;
+                    position:relative;    
+                    top:0px;                    
+                }
+                
+                span.comment-answers{
+                    float:right;
+                    margin-bottom:10px;
+                    position:relative;    
+                    top:0px;                    
+                }
+            }  
+
+            form.contrib-form{
+                width:88%;
+            }            
+        }        
+    }
+}
+

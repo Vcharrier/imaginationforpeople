@@ -1,0 +1,152 @@
+.content {
+  background-image: none !important;
+}
+
+.container_18.contributions {
+  background-image: url("../images/workgroups/white-page-content-bg2.jpg");
+  background-position: center center;
+  background-repeat: repeat-y;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* --Contributions - General ------- */
+#contrib_column {
+  color: #737373;
+}
+#contrib_column a {
+  color: #04add1;
+}
+
+/* --Contributions - Middle column ------- */
+h1.workgroup-title {
+  font-family: Georgia, "Ma Georgia", "Century Schoolbook L", "URW Palladio L", Helvetica, serif, Arial;
+  font-size: 22px;
+  font-weight: bold;
+  font-style: italic;
+  color: black;
+}
+
+#main_contrib p {
+  width: 88%;
+  color: #737373;
+  float: right;
+  text-align: justify;
+  overflow: hidden;
+}
+#main_contrib .collapse-arrow {
+  text-align: center;
+  width: 100%;
+  display: block;
+  border-top: 1px solid #e4e4e4;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+#main_contrib .collapse-arrow:hover {
+  background-color: #f3ecec;
+}
+
+.contrib-form {
+  border: 1px solid #e4e4e4;
+  padding: 4px;
+}
+.contrib-form input[type=text] {
+  width: 75%;
+  border: 0px;
+  color: #737373;
+  font-style: italic;
+}
+
+#contrib-list {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+#contrib-list li:first-child {
+  margin-top: 15px;
+}
+#contrib-list li {
+  float: right;
+  margin-top: 35px;
+  /* Sub contribution */
+}
+#contrib-list li img.avatar {
+  width: 57px;
+  height: 57px;
+}
+#contrib-list li .comment-body {
+  width: 84%;
+  float: right;
+  background-color: #e6e6e6;
+  padding: 8px;
+  padding-bottom: 22px;
+  margin-top: 20px;
+  position: relative;
+}
+#contrib-list li .comment-body span.comment-infos, #contrib-list li .comment-body span.comment-answers {
+  position: absolute;
+  top: -20px;
+}
+#contrib-list li .comment-body span.comment-answers {
+  right: 0px;
+}
+#contrib-list li .comment-body span.comment-answers a {
+  color: #8f8f8f;
+  font-weight: bold;
+}
+#contrib-list li .comment-body p.comment {
+  text-align: justify;
+  clear: both;
+}
+#contrib-list li .comment-body .comment-actions {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 10px;
+}
+#contrib-list li .comment-body .comment-actions a {
+  color: #818181;
+}
+#contrib-list li form.contrib-form {
+  width: 85%;
+  float: right;
+  margin-top: 10px;
+}
+#contrib-list li ul {
+  height: 0px;
+  overflow: hidden;
+}
+#contrib-list li ul li:first-child {
+  margin-top: 35px;
+}
+#contrib-list li ul li {
+  width: 87%;
+  margin-top: 15px;
+}
+#contrib-list li ul li img.avatar {
+  width: 35px;
+  height: 35px;
+}
+#contrib-list li ul li .comment-body {
+  width: 87%;
+  background-color: #f8f8f8;
+  background-image: none;
+  position: relative;
+  margin-top: 0px;
+}
+#contrib-list li ul li .comment-body span.comment-infos {
+  float: left;
+  margin-bottom: 10px;
+  position: relative;
+  top: 0px;
+}
+#contrib-list li ul li .comment-body span.comment-answers {
+  float: right;
+  margin-bottom: 10px;
+  position: relative;
+  top: 0px;
+}
+#contrib-list li ul li form.contrib-form {
+  width: 88%;
+}
