@@ -69,6 +69,7 @@ h1.workgroup-title {
 #contrib-list li {
   float: right;
   margin-top: 35px;
+  width: 100%;
   /* Sub contribution */
 }
 #contrib-list li img.avatar {
@@ -149,4 +150,8 @@ h1.workgroup-title {
 }
 #contrib-list li ul li form.contrib-form {
   width: 88%;
+}
+#contrib-list li ul li ul {
+  display: none;
+  visibility: hidden;
 }
