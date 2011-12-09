@@ -1,0 +1,147 @@
+{% load i18n cms_tags menu_tags sekizai_tags %}
+{% load compress %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">  
+
+<head>  
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    <meta http-equiv="Content-Language" content="{{ LANGUAGE_CODE }}" /> 
+    <meta name="keywords" content="Imagin:nation for people, i4p, social, innovation sociale" /> 
+    
+    <meta name="description" content="{% block meta_desc %}{% trans 'Imagination for People (IP) is a multilingual, Wikipedia-like open platform dedicated to disruptive social innovation. At a global scale, IP aims to detect, publicize, amplify and adapt creative solutions to the new challenges of living together.' %}{% endblock %}" /> 
+    <title>{% block title %}Imagination for People | {% trans 'identify and support imaginative social projects'|capfirst%}{% endblock %}</title>
+
+
+    {% compress css %}
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
+        <link href="{{ STATIC_URL }}css/pages/event.css" media="all" rel="stylesheet" type="text/css" />
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/generals.css" />
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/grid.css" />
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/jquery/tipsy.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/backcap.css" media="screen, projection" />
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}css/support-panel.css" media="screen, projection" />
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/login-slide.css" />
+    {% endcompress %}
+
+    {% block style %}
+    
+    {% compress css %}
+
+    {% endcompress %}
+    {% endblock %}
+    
+    
+    {% render_block "css" %}	
+
+
+    {% render_block "js" %}
+    {% compress js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.6.1.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery.reject.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/buttons.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery.slidePanel.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery.tipsy.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/slide.js"></script>
+    {% endcompress %}
+
+
+    <!-- for i18n -->
+    <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog "i4p_base" %}"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $.reject({reject: {msie5: true,
+			    msie6: true,
+			    msie7: true
+			    },
+		   imagePath: '{{ STATIC_URL}}images/browsers/',
+		   header: "{% trans "Did you know that your Internet Browser is out of date?" %}",
+		   paragraph1: "{% trans "Your browser is out of date, and may not be compatible with our website. A list of the most popular web browsers can be found below." %}",
+		   paragraph2: "{% trans "Just click on the icons to get to the download page" %}",
+		   closeMessage: "{% trans "By closing this window you acknowledge that your experience on this website may be degraded" %}",
+		   closeLink: "{% trans "Close This Window" %}"
+	 });
+		    
+	 $('.tipsed').tipsy({gravity: $.fn.tipsy.autoNS, delayIn: 300});
+
+         // Support panel
+	  $('#feedback').slidePanel({
+	      triggerName: '#feedback-trigger',
+	      position: 'fixed',
+	      triggerTopPos: '150px',
+	      panelTopPos: '0px',
+	      ajax: false
+	  });
+          var more = $('#feedback-tab textarea');
+          more.hide();
+          $('#feedback-tab #subject a.link').click(function() { more.fadeIn('fast'); });
+      });
+
+    </script>
+
+
+    
+    {% block extra_head %}{% endblock %}
+    
+    {% if not debug %}
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-21778007-2']);
+      _gaq.push(['_setDomainName', 'imaginationforpeople.org']);
+      _gaq.push(['_trackPageview']);
+   
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    {% endif %}
+
+  </head>
+
+
+  <body>
+    
+ 
+    
+    <div class="global">   
+    
+      {% block login-slide %} {% include "login-slide.html" %} {% endblock %}			  
+      
+      {% block header %} {% include "pages/header_event.html" %} {% endblock %}			
+      <!-- insert a test here ; in function of the type of the page (nav ou view) the nav nis not the same ( bubble_nav / basic nav)   -->
+      {% block nav %} {% include "nav.html" %} {% endblock %}
+      
+      {% if user.is_authenticated %}
+      <div>
+	<a href="#" id="feedback-trigger" class="trigger right">{% trans "Feedback" %}</a>
+	<div id="feedback" class="feedback-panel right">
+	  {% include 'backcap/feedback_tab.html' %}
+	</div>
+      </div>
+      {% endif %}
+
+      
+      {% block content %}<br /><br /><br /><br /><br />{% endblock %}
+
+
+      {% block footer %} {% include "pages/footer_event.html" %} {% endblock %}
+
+
+    </div>
+
+
+    {% block inline_js %}
+    {% endblock %}
+    
+  </body>
+
+</html>
+
+
+
+
+
+
