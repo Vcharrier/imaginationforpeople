@@ -1,0 +1,50 @@
+{% extends 'umessages/base_message.html' %}
+{% load i18n umessages_tags %}
+
+{% block content_title %}<h2>Messages</h2>{% endblock %}
+
+{% block usermessage_content %}
+    <ul id="usermessage_list">
+        {% for message in message_list %}
+        
+        {% if message.from_user == user %}
+            {% get_unread_message_count_between user and message.to_user as unread_between_count %}
+         {% else %}
+            {% get_unread_message_count_between user and message.from_user as unread_between_count %}
+        {% endif %}
+        
+        <li class="usermessage 
+            {% if unread_between_count != 0 %}
+            unsee
+            {% endif %}        
+        ">
+            <a href="
+                {% if message.from_user == user %}
+                    {% url userena_umessages_detail message.to_user.username %}
+                {% else %}
+                    {% url userena_umessages_detail message.from_user.username %}
+                {% endif %}
+            "> 
+                <div class="avatar"><img src="http://www.google.fr/images/srpr/logo3w.png" alt="nom" /></div>
+                
+                <div class="usermessage_body">
+                    
+                    <em>Received on {{ message.sent_at }}</em>
+                    
+                    <h1>
+                        {% if message.from_user == user %}
+                            {{ message.to_user }}
+                         {% else %}
+                             {{ message.from_user }}
+                        {% endif %}
+                    </h1>
+                    
+                    <br />
+                    <p>{{ message.latest_message }} ({{ unread_between_count }} new )</p>
+                </div>
+            </a>
+
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

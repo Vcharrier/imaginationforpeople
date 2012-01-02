@@ -1,0 +1,38 @@
+{% extends 'umessages/base_message.html' %}
+{% load i18n %}
+
+{% block content_title %}<h2>Conversation with {{ recipient }}</h2>{% endblock %}
+
+{% block usermessage_content %}
+    <ul id="usermessage_list">
+        
+        {% for message in message_list %}
+        <li class="usermessage">
+            <div class="avatar"><img src="http://www.google.fr/images/srpr/logo3w.png" alt="nom" /></div>
+            
+            <div class="usermessage_body">
+            <em>Received on {{ message.sent_at }}</em>
+            <br /><br />
+                {{ message.from_user }}
+            <br /><br />
+
+            {{ message }}
+            </div>
+        </li>        
+        {% endfor %}
+        
+        <div id="usermessage_compose">
+        
+            <div class="avatar"><img src="http://www.google.fr/images/srpr/logo3w.png" alt="nom" /></div>
+            <form action="" method="post" id="password_change_form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" name="send" value="{% trans 'Send' %}" />
+            </form>
+    
+        </div>
+
+        
+    </ul>
+    
+{% endblock %}
