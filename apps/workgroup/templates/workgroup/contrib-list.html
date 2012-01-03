@@ -7,6 +7,7 @@
 
     {% compress js %}
     <script type="text/javascript" src="/static/js/jquery/jquery.example.js"></script>
+    <script type="text/javascript" src="/static/js/jquery/workgroups/jquery.contrib.js"></script>
     <script type="text/javascript">
 
     $(document).ready(function(){
@@ -15,22 +16,30 @@
      </script>
      
     <script type="text/javascript">
-        function collapseMainContrib() {                                
-            $('#main_contrib p').animate({ height: "100px" }, {duration : 800});
+    
+    
+        function collapseMainContrib() {    
+            executecmd = false;
+            $('#main_contrib p').collapse();
             $('.collapse-arrow.collapse1').addClass('hidden');
             $('.collapse-arrow.uncollapse1').removeClass('hidden');
+            executecmd = true;
         }
         
         function uncollapseMainContrib() {
-            $('#main_contrib p').animate({ height: "100%" }, {duration : 800});
+            executecmd = false;
+            $('#main_contrib p').uncollapse();
             $('.collapse-arrow.uncollapse1').addClass('hidden');
             $('.collapse-arrow.collapse1').removeClass('hidden');
+            executecmd = true;
         }
         
         
         function displayAnswers() {
             $(this).parents("li").find('.contrib-form:first').toggleClass('hidden');
         }
+        
+        
         
         $(document).ready(function() {
             var executecmd = true;
@@ -40,27 +49,21 @@
             
             //MAIN COMMENT RESIZING
             
-            $('#main_contrib p').animate({ height: "100px" }, {duration : 800});
+            $('#main_contrib p').collapse();
             
             $('#main_contrib p').click(function() {
                 if(executecmd){
-                    executecmd = false;
                     uncollapseMainContrib();
-                    executecmd = true;
                 }
             });
             $('.collapse-arrow.uncollapse1').click(function() {
                 if(executecmd){
-                    executecmd = false;
                     uncollapseMainContrib();
-                    executecmd = true;
                 }
             });
             $('.collapse-arrow.collapse1').click(function() {
                 if(executecmd){
-                    executecmd = false;
                     collapseMainContrib();
-                    executecmd = true;
                 }
             });
             
@@ -76,7 +79,7 @@
                 var ul = $(this).closest("li").find("ul");
                 //console.log(ul.height());
                 if(ul.height() != 0){
-                    ul.animate({  height: "0px" }, {duration : 800});
+                    ul.animate({  height: "0px" }, {duration : 400});
                 }else{
                     ul.animate({ height: "100%" }, {duration : 800});
                 }
