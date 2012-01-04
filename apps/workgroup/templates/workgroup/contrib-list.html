@@ -6,8 +6,8 @@
     {{ block.super }}
 
     {% compress js %}
-    <script type="text/javascript" src="/static/js/jquery/jquery.example.js"></script>
-    <script type="text/javascript" src="/static/js/jquery/workgroups/jquery.contrib.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery.example.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/workgroups/jquery.contrib.js"></script>
     <script type="text/javascript">
 
     $(document).ready(function(){
